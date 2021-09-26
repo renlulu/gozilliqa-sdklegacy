@@ -20,8 +20,8 @@ import (
 	"crypto/rand"
 	"math/big"
 
-	"github.com/Zilliqa/gozilliqa-sdk/util"
 	"github.com/btcsuite/btcd/btcec"
+	"github.com/renlulu/gozilliqa-sdklegacy/util"
 )
 
 var (

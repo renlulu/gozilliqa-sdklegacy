@@ -21,9 +21,9 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"github.com/Zilliqa/gozilliqa-sdk/keytools"
-	"github.com/Zilliqa/gozilliqa-sdk/util"
 	"github.com/btcsuite/btcd/btcec"
+	"github.com/renlulu/gozilliqa-sdklegacy/keytools"
+	"github.com/renlulu/gozilliqa-sdklegacy/util"
 	"math/big"
 )
 

@@ -20,7 +20,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
-	"github.com/Zilliqa/gozilliqa-sdk/core"
+	"github.com/renlulu/gozilliqa-sdklegacy/core"
 	"github.com/ybbus/jsonrpc"
 	"io/ioutil"
 	"net/http"

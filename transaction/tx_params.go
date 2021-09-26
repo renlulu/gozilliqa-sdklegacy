@@ -16,7 +16,7 @@
  */
 package transaction
 
-import "github.com/Zilliqa/gozilliqa-sdk/core"
+import "github.com/renlulu/gozilliqa-sdklegacy/core"
 
 type TxParams struct {
 	ID           string                  `json:"ID"`

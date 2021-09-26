@@ -4,9 +4,9 @@ import (
 	"container/list"
 	"errors"
 	"fmt"
-	"github.com/Zilliqa/gozilliqa-sdk/core"
-	"github.com/Zilliqa/gozilliqa-sdk/multisig"
-	"github.com/Zilliqa/gozilliqa-sdk/util"
+	"github.com/renlulu/gozilliqa-sdklegacy/core"
+	"github.com/renlulu/gozilliqa-sdklegacy/multisig"
+	"github.com/renlulu/gozilliqa-sdklegacy/util"
 )
 
 type Verifier struct {

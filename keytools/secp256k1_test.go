@@ -17,7 +17,7 @@
 package keytools
 
 import (
-	"github.com/Zilliqa/gozilliqa-sdk/util"
+	"github.com/renlulu/gozilliqa-sdklegacy/util"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

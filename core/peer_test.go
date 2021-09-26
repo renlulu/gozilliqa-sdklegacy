@@ -17,7 +17,7 @@
 package core
 
 import (
-	"github.com/Zilliqa/gozilliqa-sdk/util"
+	"github.com/renlulu/gozilliqa-sdklegacy/util"
 	"math/big"
 	"testing"
 )
