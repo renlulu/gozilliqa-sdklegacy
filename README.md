@@ -1,5 +1,7 @@
 ### gozilliqa-sdk
 
+*Don't use this repo for any purpose. Only here to keep polynet*
+
 The golang version of zilliqa blockchain library
 
 #### Requirements
