@@ -25,8 +25,8 @@ type BlockHeaderBase struct {
 	PrevHash      [32]byte
 }
 
-func (b *BlockHeaderBase) ToProtobuf() *protobuf.ProtoBlockHeaderBase {
-	protoBlockHeaderBase := &protobuf.ProtoBlockHeaderBase{}
+func (b *BlockHeaderBase) ToProtobuf() *protobuf.ProtoBlockHeaderBaseL {
+	protoBlockHeaderBase := &protobuf.ProtoBlockHeaderBaseL{}
 	protoBlockHeaderBase.Version = b.Version
 	protoBlockHeaderBase.Committeehash = b.CommitteeHash[:]
 	protoBlockHeaderBase.Prevhash = b.PrevHash[:]

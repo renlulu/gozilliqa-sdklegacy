@@ -17,11 +17,13 @@
 package core
 
 import (
-	"github.com/golang/protobuf/proto"
-	"github.com/renlulu/gozilliqa-sdklegacy/protobuf"
-	"github.com/renlulu/gozilliqa-sdklegacy/util"
 	"math/big"
 	"strconv"
+
+	"github.com/golang/protobuf/proto"
+
+	"github.com/renlulu/gozilliqa-sdklegacy/protobuf"
+	"github.com/renlulu/gozilliqa-sdklegacy/util"
 )
 
 type TxBlockHeader struct {
@@ -88,8 +90,8 @@ func (t *TxBlockHeader) Serialize() []byte {
 	return bytes
 }
 
-func (t *TxBlockHeader) ToProtoBuf() *protobuf.ProtoTxBlock_TxBlockHeader {
-	protoTxBlockHeader := &protobuf.ProtoTxBlock_TxBlockHeader{}
+func (t *TxBlockHeader) ToProtoBuf() *protobuf.ProtoTxBlockL_TxBlockHeaderL {
+	protoTxBlockHeader := &protobuf.ProtoTxBlockL_TxBlockHeaderL{}
 	protoBlockHeaderBase := t.BlockHeaderBase.ToProtobuf()
 	protoTxBlockHeader.Blockheaderbase = protoBlockHeaderBase
 
@@ -98,11 +100,11 @@ func (t *TxBlockHeader) ToProtoBuf() *protobuf.ProtoTxBlock_TxBlockHeader {
 
 	data := make([]byte, 0)
 	data = UintToByteArray(data, 0, t.Rewards, 16)
-	protoTxBlockHeader.Rewards = &protobuf.ByteArray{Data: data}
+	protoTxBlockHeader.Rewards = &protobuf.ByteArrayL{Data: data}
 
 	protoTxBlockHeader.Blocknum = t.BlockNum
 
-	hashset := &protobuf.ProtoTxBlock_TxBlockHashSet{
+	hashset := &protobuf.ProtoTxBlockL_TxBlockHashSetL{
 		Stateroothash:  t.HashSet.StateRootHash[:],
 		Statedeltahash: t.HashSet.DeltaHash[:],
 		Mbinfohash:     t.HashSet.MbInfoHash[:],
@@ -110,7 +112,7 @@ func (t *TxBlockHeader) ToProtoBuf() *protobuf.ProtoTxBlock_TxBlockHeader {
 	protoTxBlockHeader.Hash = hashset
 
 	protoTxBlockHeader.Numtxs = &t.NumTxs
-	protoTxBlockHeader.Minerpubkey = &protobuf.ByteArray{Data: util.DecodeHex(t.MinerPubKey)}
+	protoTxBlockHeader.Minerpubkey = &protobuf.ByteArrayL{Data: util.DecodeHex(t.MinerPubKey)}
 	protoTxBlockHeader.Dsblocknum = t.DSBlockNum
 
 	return protoTxBlockHeader

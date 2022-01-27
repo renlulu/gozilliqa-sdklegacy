@@ -17,10 +17,12 @@
 package core
 
 import (
+	"strconv"
+
 	"github.com/golang/protobuf/proto"
+
 	"github.com/renlulu/gozilliqa-sdklegacy/protobuf"
 	"github.com/renlulu/gozilliqa-sdklegacy/util"
-	"strconv"
 )
 
 type DsBlock struct {
@@ -78,7 +80,7 @@ func (dst *DsBlock) ToProtobuf() []byte {
 	protoBlockBase := dst.BlockBase.ToProtobuf()
 	protoDSBlockHeader := dst.BlockHeader.ToProtobuf(false)
 
-	protoDSBlock := &protobuf.ProtoDSBlock{
+	protoDSBlock := &protobuf.ProtoDSBlockL{
 		Blockbase: protoBlockBase,
 		Header:    protoDSBlockHeader,
 	}
