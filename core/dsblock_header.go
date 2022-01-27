@@ -17,11 +17,13 @@
 package core
 
 import (
-	"github.com/golang/protobuf/proto"
-	"github.com/renlulu/gozilliqa-sdklegacy/protobuf"
-	"github.com/renlulu/gozilliqa-sdklegacy/util"
 	"math/big"
 	"strconv"
+
+	"github.com/golang/protobuf/proto"
+
+	"github.com/renlulu/gozilliqa-sdklegacy/protobuf"
+	"github.com/renlulu/gozilliqa-sdklegacy/util"
 )
 
 // https://github.com/Zilliqa/Zilliqa/blob/04162ef0c3c1787ebbd940b7abd6b7ff1d4714ed/src/libData/BlockData/BlockHeader/DSBlockHeader.h
@@ -149,8 +151,8 @@ func (d *DsBlockHeader) Serialize() []byte {
 }
 
 // the default value of concreteVarsOnly should be false
-func (d *DsBlockHeader) ToProtobuf(concreteVarsOnly bool) *protobuf.ProtoDSBlock_DSBlockHeader {
-	protoDSBlockHeader := &protobuf.ProtoDSBlock_DSBlockHeader{}
+func (d *DsBlockHeader) ToProtobuf(concreteVarsOnly bool) *protobuf.ProtoDSBlockL_DSBlockHeaderL {
+	protoDSBlockHeader := &protobuf.ProtoDSBlockL_DSBlockHeaderL{}
 	protoBlockHeaderBase := d.BlockHeaderBase.ToProtobuf()
 	protoDSBlockHeader.Blockheaderbase = protoBlockHeaderBase
 
@@ -164,9 +166,9 @@ func (d *DsBlockHeader) ToProtobuf(concreteVarsOnly bool) *protobuf.ProtoDSBlock
 			Data: data,
 		}
 
-		var protobufWinners []*protobuf.ProtoDSBlock_DSBlockHeader_PowDSWinners
+		var protobufWinners []*protobuf.ProtoDSBlockL_DSBlockHeaderL_PowDSWinnersL
 		for key, winner := range d.PoWDSWinners {
-			protobufWinner := &protobuf.ProtoDSBlock_DSBlockHeader_PowDSWinners{
+			protobufWinner := &protobuf.ProtoDSBlockL_DSBlockHeaderL_PowDSWinnersL{
 				Key: &protobuf.ByteArray{Data: util.DecodeHex(key)},
 				Val: &protobuf.ByteArray{Data: winner.Serialize()},
 			}
@@ -174,23 +176,23 @@ func (d *DsBlockHeader) ToProtobuf(concreteVarsOnly bool) *protobuf.ProtoDSBlock
 		}
 		protoDSBlockHeader.Dswinners = protobufWinners
 
-		var proposals []*protobuf.ProtoDSBlock_DSBlockHeader_Proposal
+		var proposals []*protobuf.ProtoDSBlockL_DSBlockHeaderL_ProposalL
 		for proposal, pair := range d.GovDSShardVotesMap {
-			protoproposal := &protobuf.ProtoDSBlock_DSBlockHeader_Proposal{}
-			protoproposal.Proposalid = proposal
+			protoproposal := &protobuf.ProtoDSBlockL_DSBlockHeaderL_ProposalL{}
+			protoproposal.ProposalidL = proposal
 
-			var dsvotes []*protobuf.ProtoDSBlock_DSBlockHeader_Vote
+			var dsvotes []*protobuf.ProtoDSBlockL_DSBlockHeaderL_VoteL
 			for value, count := range pair.First {
-				dsvote := &protobuf.ProtoDSBlock_DSBlockHeader_Vote{
+				dsvote := &protobuf.ProtoDSBlockL_DSBlockHeaderL_VoteL{
 					Value: value,
 					Count: count,
 				}
 				dsvotes = append(dsvotes, dsvote)
 			}
 
-			var minerVotes []*protobuf.ProtoDSBlock_DSBlockHeader_Vote
+			var minerVotes []*protobuf.ProtoDSBlockL_DSBlockHeaderL_VoteL
 			for value, count := range pair.Second {
-				minerVote := &protobuf.ProtoDSBlock_DSBlockHeader_Vote{
+				minerVote := &protobuf.ProtoDSBlockL_DSBlockHeaderL_VoteL{
 					Value: value,
 					Count: count,
 				}
@@ -220,7 +222,7 @@ func (d *DsBlockHeader) ToProtobuf(concreteVarsOnly bool) *protobuf.ProtoDSBlock
 
 	protoDSBlockHeader.Swinfo = &protobuf.ByteArray{Data: d.SwInfo.Serialize()}
 
-	hashset := &protobuf.ProtoDSBlock_DSBlockHashSet{
+	hashset := &protobuf.ProtoDSBlockL_DSBlockHashSetL{
 		Shardinghash:  d.DSBlockHashSet.ShardingHash,
 		Reservedfield: d.DSBlockHashSet.ReservedField[:],
 	}

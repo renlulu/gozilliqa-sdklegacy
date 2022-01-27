@@ -13,7 +13,7 @@ message ByteArray
     optional bytes data = 1;
 }
 
-message ProtoTransactionCoreInfo
+message ProtoTransactionCoreInfoL
 {
     optional uint32 version         = 1;
     optional uint64 nonce           = 2;
@@ -26,26 +26,26 @@ message ProtoTransactionCoreInfo
     optional bytes data             = 9;
 }
 
-message ProtoTransaction
+message ProtoTransactionL
 {
     optional bytes tranid                  = 1;
-    optional ProtoTransactionCoreInfo info = 2;
+    optional ProtoTransactionCoreInfoL info = 2;
     optional ByteArray signature           = 3;
 }
 
-message ProtoTransactionReceipt
+message ProtoTransactionReceiptL
 {
     optional bytes receipt    = 1;
     optional uint64 cumgas = 2;
 }
 
-message ProtoTransactionWithReceipt
+message ProtoTransactionWithReceiptL
 {
-    optional ProtoTransaction transaction    = 1;
-    optional ProtoTransactionReceipt receipt = 2;
+    optional ProtoTransactionL transaction    = 1;
+    optional ProtoTransactionReceiptL receipt = 2;
 }
 
-message ProtoAccountBase
+message ProtoAccountBaseL
 {
      optional uint32 version    = 1;
      optional ByteArray balance = 2;
@@ -55,9 +55,9 @@ message ProtoAccountBase
 }
 
 // Used in databases "dsBlocks", "microBlocks", "txBlocks", "VCBlocks"
-message ProtoBlockBase
+message ProtoBlockBaseL
 {
-    message CoSignatures
+    message CoSignaturesL
     {
         ByteArray cs1   = 1;               // Added in: v1.0, Deprecated in: N/A
         repeated bool b1         = 2 [packed=true]; // Added in: v1.0, Deprecated in: N/A
@@ -66,13 +66,13 @@ message ProtoBlockBase
         // Add new members here
     }
     bytes blockhash     = 1;               // Added in: v1.0, Deprecated in: N/A
-    CoSignatures cosigs = 2;               // Added in: v1.0, Deprecated in: N/A
+    CoSignaturesL cosigs = 2;               // Added in: v1.0, Deprecated in: N/A
     uint64 timestamp    = 3;               // Added in: v1.0, Deprecated in: N/A
     // Add new members here
 }
 
 // Used in "dsBlockHeader", "microBlockHeader", "txBlockHeader", and "VCBlockHeader"
-message ProtoBlockHeaderBase
+message ProtoBlockHeaderBaseL
 {
     uint32 version      = 1;   // Added in: v1.0, Deprecated in: N/A
     bytes committeehash = 2;   // Added in: v1.0, Deprecated in: N/A
@@ -80,17 +80,17 @@ message ProtoBlockHeaderBase
 }
 
 // Used in database "dsBlocks"
-message ProtoDSBlock
+message ProtoDSBlockL
 {
-    message DSBlockHashSet
+    message DSBlockHashSetL
     {
         bytes shardinghash     = 1;  // Added in: v1.0, Deprecated in: N/A
         bytes reservedfield    = 2;  // Added in: v1.0, Deprecated in: N/A
         // Add new members here
     }
-    message DSBlockHeader
+    message DSBlockHeaderL
     {
-        ProtoBlockHeaderBase blockheaderbase = 1;  // Added in: v1.0, Deprecated in: N/A
+        ProtoBlockHeaderBaseL blockheaderbase = 1;  // Added in: v1.0, Deprecated in: N/A
         uint32 dsdifficulty                  = 2;  // Added in: v1.0, Deprecated in: N/A, Only LSB used
         uint32 difficulty                    = 3;  // Added in: v1.0, Deprecated in: N/A, Only LSB used
         bytes prevhash                       = 4;  // Added in: v1.0, Deprecated in: N/A, 32 bytes
@@ -99,36 +99,36 @@ message ProtoDSBlock
         uint64 epochnum       = 7;  // Added in: v1.0, Deprecated in: N/A
         ByteArray gasprice                   = 8;  // Added in: v1.0, Deprecated in: N/A
         ByteArray swinfo                     = 9;  // Added in: v1.0, Deprecated in: N/A
-        message PowDSWinners
+        message PowDSWinnersL
         {
             ByteArray key      = 1;  // Added in: v1.0, Deprecated in: N/A
             ByteArray val      = 2;  // Added in: v1.0, Deprecated in: N/A
             // Add new members here
         }
-        repeated PowDSWinners dswinners = 10; // Added in: v1.0, Deprecated in: N/A
-        DSBlockHashSet hash    = 11; // Added in: v1.0, Deprecated in: N/A
+        repeated PowDSWinnersL dswinners = 10; // Added in: v1.0, Deprecated in: N/A
+        DSBlockHashSetL hash    = 11; // Added in: v1.0, Deprecated in: N/A
         repeated ByteArray dsremoved    = 12; // Added in: v2.0, Deprecated in: N/A
         // Add new members here
-        message Vote
+        message VoteL
         {
             uint32 value = 1;
             uint32 count = 2;
         }
-        message Proposal
+        message ProposalL
         {
-            uint32 proposalid           = 1;
-            repeated Vote dsvotes       = 2;
-            repeated Vote minervotes    = 3;
+            uint32 proposalidL          = 1;
+            repeated VoteL dsvotes       = 2;
+            repeated VoteL minervotes    = 3;
         }
-        repeated Proposal proposals      = 13;
+        repeated ProposalL proposals      = 13;
     }
-    DSBlockHeader header       = 1;  // Added in: v1.0, Deprecated in: N/A
-    ProtoBlockBase blockbase   = 2;  // Added in: v1.0, Deprecated in: N/A
+    DSBlockHeaderL header       = 1;  // Added in: v1.0, Deprecated in: N/A
+    ProtoBlockBaseL blockbase   = 2;  // Added in: v1.0, Deprecated in: N/A
     // Add new members here
 }
 
 // Used in database "txBlocks"
-message ProtoMbInfo
+message ProtoMbInfoL
 {
     bytes mbhash   = 1; // Added in: v1.0, Deprecated in: N/A
     bytes txroot   = 2; // Added in: v1.0, Deprecated in: N/A
@@ -137,31 +137,31 @@ message ProtoMbInfo
 }
 
 // Used in database "txBlocks"
-message ProtoTxBlock
+message ProtoTxBlockL
 {
-    message TxBlockHashSet
+    message TxBlockHashSetL
     {
         bytes stateroothash   = 1;  // Added in: v1.0, Deprecated in: N/A
         bytes statedeltahash  = 2;  // Added in: v1.0, Deprecated in: N/A
         bytes mbinfohash      = 3;  // Added in: v1.0, Deprecated in: N/A
         // Add new members here
     }
-    message TxBlockHeader
+    message TxBlockHeaderL
     {
-        ProtoBlockHeaderBase blockheaderbase = 1;  // Added in: v1.0, Deprecated in: N/A
+        ProtoBlockHeaderBaseL blockheaderbase = 1;  // Added in: v1.0, Deprecated in: N/A
         uint64 gaslimit                      = 2;  // Added in: v1.0, Deprecated in: N/A
         optional uint64 gasused                       = 3; // Added in: v1.0, Deprecated in: N/A
         ByteArray rewards                    = 4;  // Added in: v1.0, Deprecated in: N/A
         bytes prevhash                       = 5;  // Added in: v1.0, Deprecated in: N/A
         uint64 blocknum                      = 6; // Added in: v1.0, Deprecated in: N/A
-        TxBlockHashSet hash                  = 7;  // Added in: v1.0, Deprecated in: N/A
+        TxBlockHashSetL hash                  = 7;  // Added in: v1.0, Deprecated in: N/A
         optional uint32 numtxs               = 8;  // Added in: v1.0, Deprecated in: N/A
         ByteArray minerpubkey                = 9;  // Added in: v1.0, Deprecated in: N/A
         uint64 dsblocknum                    = 10;  // Added in: v1.0, Deprecated in: N/A
         // Add new members here
     }
-    TxBlockHeader header      = 1;  // Added in: v1.0, Deprecated in: N/A
-    repeated ProtoMbInfo mbinfos       = 2;  // Added in: v1.0, Deprecated in: N/A
-    ProtoBlockBase blockbase  = 3;  // Added in: v1.0, Deprecated in: N/A
+    TxBlockHeaderL header      = 1;  // Added in: v1.0, Deprecated in: N/A
+    repeated ProtoMbInfoL mbinfos       = 2;  // Added in: v1.0, Deprecated in: N/A
+    ProtoBlockBaseL blockbase  = 3;  // Added in: v1.0, Deprecated in: N/A
     // Add new members here
 }

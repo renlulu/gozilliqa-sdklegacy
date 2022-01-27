@@ -24,15 +24,15 @@ type BlockBase struct {
 	Timestamp uint64
 }
 
-func (b *BlockBase) ToProtobuf() *protobuf.ProtoBlockBase {
-	blockBase := &protobuf.ProtoBlockBase{}
+func (b *BlockBase) ToProtobuf() *protobuf.ProtoBlockBaseL {
+	blockBase := &protobuf.ProtoBlockBaseL{}
 	blockBase.Blockhash = b.BlockHash[:]
 	blockBase.Timestamp = b.Timestamp
 
 	cs1 := make([]byte, 0)
 	cs2 := make([]byte, 0)
 
-	cosig := &protobuf.ProtoBlockBase_CoSignatures{
+	cosig := &protobuf.ProtoBlockBaseL_CoSignaturesL{
 		Cs1: &protobuf.ByteArray{
 			Data: b.Cosigs.CS1.Serialize(cs1, 0),
 		},

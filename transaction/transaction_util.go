@@ -20,11 +20,13 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
-	"github.com/golang/protobuf/proto"
-	"github.com/renlulu/gozilliqa-sdklegacy/protobuf"
-	"github.com/renlulu/gozilliqa-sdklegacy/util"
 	"math/big"
 	"strconv"
+
+	"github.com/golang/protobuf/proto"
+
+	"github.com/renlulu/gozilliqa-sdklegacy/protobuf"
+	"github.com/renlulu/gozilliqa-sdklegacy/util"
 )
 
 func EncodeTransactionProto(txParams TxParams) ([]byte, error) {
@@ -66,7 +68,7 @@ func EncodeTransactionProto(txParams TxParams) ([]byte, error) {
 		return nil, err3
 	}
 
-	protoTransactionCoreInfo := protobuf.ProtoTransactionCoreInfo{
+	protoTransactionCoreInfo := protobuf.ProtoTransactionCoreInfoL{
 		Version:      &version,
 		Nonce:        &nonce,
 		Toaddr:       util.DecodeHex(txParams.ToAddr),

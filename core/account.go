@@ -18,7 +18,8 @@ package core
 
 import (
 	"github.com/golang/protobuf/proto"
-	protobuf "github.com/renlulu/gozilliqa-sdklegacy/protobuf"
+
+	"github.com/renlulu/gozilliqa-sdklegacy/protobuf"
 )
 
 type AccountBase struct {
@@ -30,7 +31,7 @@ type AccountBase struct {
 }
 
 func AccountBaseFromBytes(bytes []byte) (*AccountBase, error) {
-	var protoAccountBase protobuf.ProtoAccountBase
+	var protoAccountBase protobuf.ProtoAccountBaseL
 	err := proto.Unmarshal(bytes, &protoAccountBase)
 	if err != nil {
 		return nil, err
