@@ -23,11 +23,12 @@ import (
 	"strconv"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
+
 	"github.com/renlulu/gozilliqa-sdklegacy/core"
 	provider2 "github.com/renlulu/gozilliqa-sdklegacy/provider"
 	"github.com/renlulu/gozilliqa-sdklegacy/transaction"
 	"github.com/renlulu/gozilliqa-sdklegacy/util"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestPayload(t *testing.T) {
