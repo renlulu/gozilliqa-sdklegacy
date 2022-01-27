@@ -51,15 +51,15 @@ func EncodeTransactionProto(txParams TxParams) ([]byte, error) {
 		return nil, err2
 	}
 
-	senderpubkey := protobuf.ByteArray{
+	senderpubkey := protobuf.ByteArrayL{
 		Data: util.DecodeHex(txParams.SenderPubKey),
 	}
 
-	amountArray := protobuf.ByteArray{
+	amountArray := protobuf.ByteArrayL{
 		Data: bigIntToPaddedBytes(amount, 32),
 	}
 
-	gasPriceArray := protobuf.ByteArray{
+	gasPriceArray := protobuf.ByteArrayL{
 		Data: bigIntToPaddedBytes(gasPrice, 32),
 	}
 

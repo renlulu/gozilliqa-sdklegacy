@@ -162,15 +162,15 @@ func (d *DsBlockHeader) ToProtobuf(concreteVarsOnly bool) *protobuf.ProtoDSBlock
 		data := make([]byte, 0)
 		gasPriceInt, _ := new(big.Int).SetString(d.GasPrice, 10)
 		data = UintToByteArray(data, 0, gasPriceInt, 16)
-		protoDSBlockHeader.Gasprice = &protobuf.ByteArray{
+		protoDSBlockHeader.Gasprice = &protobuf.ByteArrayL{
 			Data: data,
 		}
 
 		var protobufWinners []*protobuf.ProtoDSBlockL_DSBlockHeaderL_PowDSWinnersL
 		for key, winner := range d.PoWDSWinners {
 			protobufWinner := &protobuf.ProtoDSBlockL_DSBlockHeaderL_PowDSWinnersL{
-				Key: &protobuf.ByteArray{Data: util.DecodeHex(key)},
-				Val: &protobuf.ByteArray{Data: winner.Serialize()},
+				Key: &protobuf.ByteArrayL{Data: util.DecodeHex(key)},
+				Val: &protobuf.ByteArrayL{Data: winner.Serialize()},
 			}
 			protobufWinners = append(protobufWinners, protobufWinner)
 		}
@@ -206,9 +206,9 @@ func (d *DsBlockHeader) ToProtobuf(concreteVarsOnly bool) *protobuf.ProtoDSBlock
 
 		protoDSBlockHeader.Proposals = proposals
 
-		var dsremoved []*protobuf.ByteArray
+		var dsremoved []*protobuf.ByteArrayL
 		for _, key := range d.RemoveDSNodePubKeys {
-			dr := &protobuf.ByteArray{
+			dr := &protobuf.ByteArrayL{
 				Data: util.DecodeHex(key),
 			}
 			dsremoved = append(dsremoved, dr)
@@ -216,11 +216,11 @@ func (d *DsBlockHeader) ToProtobuf(concreteVarsOnly bool) *protobuf.ProtoDSBlock
 		protoDSBlockHeader.Dsremoved = dsremoved
 	}
 
-	protoDSBlockHeader.Leaderpubkey = &protobuf.ByteArray{Data: util.DecodeHex(d.LeaderPubKey)}
+	protoDSBlockHeader.Leaderpubkey = &protobuf.ByteArrayL{Data: util.DecodeHex(d.LeaderPubKey)}
 	protoDSBlockHeader.Blocknum = d.BlockNum
 	protoDSBlockHeader.Epochnum = d.EpochNum
 
-	protoDSBlockHeader.Swinfo = &protobuf.ByteArray{Data: d.SwInfo.Serialize()}
+	protoDSBlockHeader.Swinfo = &protobuf.ByteArrayL{Data: d.SwInfo.Serialize()}
 
 	hashset := &protobuf.ProtoDSBlockL_DSBlockHashSetL{
 		Shardinghash:  d.DSBlockHashSet.ShardingHash,

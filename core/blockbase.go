@@ -33,11 +33,11 @@ func (b *BlockBase) ToProtobuf() *protobuf.ProtoBlockBaseL {
 	cs2 := make([]byte, 0)
 
 	cosig := &protobuf.ProtoBlockBaseL_CoSignaturesL{
-		Cs1: &protobuf.ByteArray{
+		Cs1: &protobuf.ByteArrayL{
 			Data: b.Cosigs.CS1.Serialize(cs1, 0),
 		},
 		B1: b.Cosigs.B1,
-		Cs2: &protobuf.ByteArray{
+		Cs2: &protobuf.ByteArrayL{
 			Data: b.Cosigs.CS2.Serialize(cs2, 0),
 		},
 		B2: b.Cosigs.B2,

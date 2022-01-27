@@ -100,7 +100,7 @@ func (t *TxBlockHeader) ToProtoBuf() *protobuf.ProtoTxBlockL_TxBlockHeaderL {
 
 	data := make([]byte, 0)
 	data = UintToByteArray(data, 0, t.Rewards, 16)
-	protoTxBlockHeader.Rewards = &protobuf.ByteArray{Data: data}
+	protoTxBlockHeader.Rewards = &protobuf.ByteArrayL{Data: data}
 
 	protoTxBlockHeader.Blocknum = t.BlockNum
 
@@ -112,7 +112,7 @@ func (t *TxBlockHeader) ToProtoBuf() *protobuf.ProtoTxBlockL_TxBlockHeaderL {
 	protoTxBlockHeader.Hash = hashset
 
 	protoTxBlockHeader.Numtxs = &t.NumTxs
-	protoTxBlockHeader.Minerpubkey = &protobuf.ByteArray{Data: util.DecodeHex(t.MinerPubKey)}
+	protoTxBlockHeader.Minerpubkey = &protobuf.ByteArrayL{Data: util.DecodeHex(t.MinerPubKey)}
 	protoTxBlockHeader.Dsblocknum = t.DSBlockNum
 
 	return protoTxBlockHeader
